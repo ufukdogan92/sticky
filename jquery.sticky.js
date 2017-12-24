@@ -28,6 +28,7 @@
   var defaults = {
       topSpacing: 0,
       bottomSpacing: 0,
+      startScrollTop: 0,
       className: 'is-sticky',
       wrapperClassName: 'sticky-wrapper',
       center: false,
@@ -43,12 +44,12 @@
     scroller = function() {
       var scrollTop = $window.scrollTop(),
         documentHeight = $document.height(),
-        dwh = documentHeight - windowHeight,
-        extra = (scrollTop > dwh) ? dwh - scrollTop : 0;
+        dwh = documentHeight - windowHeight;
 
       for (var i = 0, l = sticked.length; i < l; i++) {
         var s = sticked[i],
           elementTop = s.stickyWrapper.offset().top,
+          extra = (scrollTop > dwh) ? dwh - scrollTop : s.startScrollTop,
           etse = elementTop - s.topSpacing - extra;
 
         //update height in case of dynamic content
